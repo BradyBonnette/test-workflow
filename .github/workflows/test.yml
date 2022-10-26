@@ -15,11 +15,11 @@ jobs:
           else
             echo 'NIGHTLY_BUILD_REF="$GITHUB_REF_NAME"' >> $GITHUB_ENV
           fi
+      - name: Print env
+        run: env
       - name: Clone Repository
         uses: actions/checkout@v3
         with:
           ref: ${{ env.NIGHTLY_BUILD_REF }}
-      - name: Print env
-        run: env
       - name: Cat file
         run: cat test.txt
