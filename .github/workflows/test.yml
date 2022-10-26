@@ -1,5 +1,8 @@
 name: Some manual workflow
-on: [workflow_dispatch]
+on:
+  schedule:
+    - cron: '23 16 * * *'
+  workflow_dispatch:
 jobs:
   example:
     name: Example Job
