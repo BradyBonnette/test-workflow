@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
     inputs:
       force_exact_ref_name:
-        description: 'Use selected branch instead of attempting to default to "develop". Keep this set as enabled if running from the Github Actions page.'
+        description: 'Use selected branch instead of attempting to default to "develop". Keep this box checked if running from the Github Actions page.'
         required: false
         default: true
         type: boolean
