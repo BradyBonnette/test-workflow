@@ -10,5 +10,7 @@ jobs:
     steps:
       - name: Clone Repository
         uses: actions/checkout@v3
+        with:
+          ref: ${{ env.GITHUB_REF }}
       - name: Cat file
         run: cat test.txt
