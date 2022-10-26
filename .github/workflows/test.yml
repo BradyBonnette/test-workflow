@@ -16,11 +16,14 @@ jobs:
     steps:
       - name: Set up correct branch environment variable
         run: |
-          env
-          if [ $GITHUB_REF_NAME == "master" ]; then
-            echo "NIGHTLY_BUILD_REF=api-call" >> $GITHUB_ENV
-          else
+          if [ $FORCE_EXACT_REF_NAME == "true" ]; then
             echo "NIGHTLY_BUILD_REF=$GITHUB_REF_NAME" >> $GITHUB_ENV
+          else
+            if [ $GITHUB_REF_NAME == "master" ]; then
+              echo "NIGHTLY_BUILD_REF=api-call" >> $GITHUB_ENV
+            else
+              echo "NIGHTLY_BUILD_REF=$GITHUB_REF_NAME" >> $GITHUB_ENV
+            fi
           fi
         env:
           FORCE_EXACT_REF_NAME: ${{ inputs.force_exact_ref_name }}

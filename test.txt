@@ -1,1 +1,1 @@
-Hi, from new feature!
+Hi, from master!
