@@ -1,7 +1,7 @@
 name: Some manual workflow
 on:
   schedule:
-    - cron: '40 16 * * *'
+    - cron: '05 17 * * *'
   workflow_dispatch:
 jobs:
   example:
