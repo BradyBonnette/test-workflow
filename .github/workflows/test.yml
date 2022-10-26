@@ -5,9 +5,9 @@ on:
   workflow_dispatch:
     inputs:
       force_exact_ref_name:
-        description: 'Forces exact ref name defined by GITHUB_REF_NAME, instead of attempting to default to api-call'
+        description: 'Use selected branch instead of attempting to default to "develop". Keep this set as enabled if running from the Github Actions page.'
         required: false
-        default: false
+        default: true
         type: boolean
 jobs:
   example:
