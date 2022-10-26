@@ -8,10 +8,17 @@ jobs:
     name: Example Job
     runs-on: ubuntu-latest
     steps:
+      - name: Set up correct branch environment variable
+        run: |
+          if [ $GITHUB_REF_NAME == "master" ]; then
+            echo 'NIGHTLY_BUILD_REF="api-call"' >> $GITHUB_ENV
+          else
+            echo 'NIGHTLY_BUILD_REF="$GITHUB_REF_NAME"' >> $GITHUB_ENV
+          fi
       - name: Clone Repository
         uses: actions/checkout@v3
         with:
-          ref: ${{ env.GITHUB_REF }}
+          ref: ${{ env.NIGHTLY_BUILD_REF }}
       - name: Print env
         run: env
       - name: Cat file
