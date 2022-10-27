@@ -11,8 +11,10 @@ jobs:
       - name: Set up correct branch environment variable
         run: |
           if [ $GITHUB_EVENT_NAME == "schedule" ]; then
+            echo "Running via schedule, so using branch api-call"
             echo "NIGHTLY_BUILD_REF=api-call" >> $GITHUB_ENV
           else
+            echo "Not running via schedule, so using branch $GITHUB_REF_NAME"
             echo "NIGHTLY_BUILD_REF=$GITHUB_REF_NAME" >> $GITHUB_ENV
           fi
       - name: Print env
