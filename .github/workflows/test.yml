@@ -3,12 +3,6 @@ on:
   schedule:
     - cron: '05 17 * * *'
   workflow_dispatch:
-    inputs:
-      force_exact_ref_name:
-        description: 'Use selected branch instead of attempting to default to "develop". Keep this box checked if running from the Github Actions page.'
-        required: false
-        default: true
-        type: boolean
 jobs:
   example:
     name: Example Job
@@ -16,17 +10,11 @@ jobs:
     steps:
       - name: Set up correct branch environment variable
         run: |
-          if [ $FORCE_EXACT_REF_NAME == "true" ]; then
-            echo "NIGHTLY_BUILD_REF=$GITHUB_REF_NAME" >> $GITHUB_ENV
+          if [ $GITHUB_EVENT_NAME == "schedule" ]; then
+            echo "NIGHTLY_BUILD_REF=api-call" >> $GITHUB_ENV
           else
-            if [ $GITHUB_REF_NAME == "master" ]; then
-              echo "NIGHTLY_BUILD_REF=api-call" >> $GITHUB_ENV
-            else
-              echo "NIGHTLY_BUILD_REF=$GITHUB_REF_NAME" >> $GITHUB_ENV
-            fi
+            echo "NIGHTLY_BUILD_REF=$GITHUB_REF_NAME" >> $GITHUB_ENV
           fi
-        env:
-          FORCE_EXACT_REF_NAME: ${{ inputs.force_exact_ref_name }}
       - name: Print env
         run: env
       - name: Clone Repository
